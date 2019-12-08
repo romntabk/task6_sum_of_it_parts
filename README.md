@@ -1,0 +1,1 @@
+# task6_sum_of_it_parts
