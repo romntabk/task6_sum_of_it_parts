@@ -7,32 +7,33 @@
 #include <map>
 #include <string>
 
-using namespace std;
-
 //**************** Part ****************
 class Part 
 {
 public:
-    string name;
-    Part(string const &n) : name(n) {};
-    void describe(void);
-    int count_howmany(Part const *p);
+    Part(const std::string& n) : name(n) {}
+    void describe(void) const;
+    int count_howmany(const Part *p) const;
+    void add_subpart(Part* p, int n);
+
+private:
+    std::string name;
+    std::map<Part*, int> subparts;
 };
 
 //**************** NameContainer ****************
 class NameContainer  
 {
+public:
+	NameContainer() = default;
+	~NameContainer();
+	Part* lookup(const std::string& name);
 
 private:
-	map<string,Part*> name_map;
-
-public:
-	NameContainer(void) {};
-	~NameContainer(void);
-	Part* lookup(string const &name);
+    std::map<std::string, Part*> name_map;
 };
 
-extern void add_part(string const &x, int q, string const &y);
+extern void add_part(const std::string& x, int q, const std::string& y);
 extern NameContainer partContainer; 
 
 #endif
